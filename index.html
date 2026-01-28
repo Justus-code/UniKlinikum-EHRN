@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universitätsklinikum Hamburg | EHRN</title>
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNDQzIiBmaWxsPSIjMDA0M0NFIi8+CjxyZWN0IHk9IjQ0MyIgd2lkdGg9IjUwMCIgaGVpZ2h0PSI1NyIgZmlsbD0id2hpdGUiLz4KPHRleHQgeD0iMjUwIiB5PSIzMjAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNjAiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5VSzwvdGV4dD4KPHRleHQgeD0iMjUwIiB5PSI0ODUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0NSIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzk5OTk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjIwIj5IIEEgTSBCIFUgUiBHPC90ZXh0Pgo8L3N2Zz4=">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #1a1a1a;
+            --text-secondary: #6c757d;
+            --accent-blue: #0066cc;
+            --accent-light: #e7f3ff;
+            --border-color: #dee2e6;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --accent-blue: #4d9fff;
+            --accent-light: #1e3a5f;
+            --border-color: #404040;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo img {
+            height: 45px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--border-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-blue);
+            transform: scale(1.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #004999 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        /* Sections */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .team-category {
+            margin-bottom: 4rem;
+        }
+
+        .category-title {
+            color: var(--accent-blue);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--accent-blue);
+            text-align: center;
+        }
+
+        .section-intro {
+            text-align: center;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-card {
+            background-color: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px var(--shadow);
+        }
+
+        .team-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 4px solid var(--accent-blue);
+            background-color: var(--accent-blue);
+        }
+
+        .team-card .avatar-placeholder {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0066cc 0%, #004999 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin: 0 auto 1.5rem;
+            border: 4px solid var(--accent-blue);
+        }
+
+        .team-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .team-card .role {
+            color: var(--accent-blue);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .team-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .placeholder-text {
+            color: var(--text-secondary);
+            font-style: italic;
+            padding: 2rem;
+            text-align: center;
+            background-color: var(--accent-light);
+            border-radius: 8px;
+            border: 2px dashed var(--border-color);
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-blue);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 16px var(--shadow);
+        }
+
+        .feature-card h3 {
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-blue);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: var(--text-secondary);
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .privacy-link {
+            color: var(--accent-blue);
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .privacy-link:hover {
+            color: #004999;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: var(--bg-primary);
+            margin: 5% auto;
+            padding: 2.5rem;
+            border-radius: 16px;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.3s ease;
+            position: relative;
+        }
+
+        .close {
+            color: var(--text-secondary);
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: var(--accent-blue);
+        }
+
+        .modal h2 {
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .modal p {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+
+        .modal .warning {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin: 1.5rem 0;
+            font-weight: 600;
+        }
+
+        [data-theme="dark"] .modal .warning {
+            background-color: #4a3f1f;
+            color: #ffd54f;
+            border-left-color: #ffc107;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .modal-content {
+                margin: 10% 1rem;
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNDQzIiBmaWxsPSIjMDA0M0NFIi8+CjxyZWN0IHk9IjQ0MyIgd2lkdGg9IjUwMCIgaGVpZ2h0PSI1NyIgZmlsbD0id2hpdGUiLz4KPHRleHQgeD0iMjUwIiB5PSIzMjAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNjAiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5VSzwvdGV4dD4KPHRleHQgeD0iMjUwIiB5PSI0ODUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0NSIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzk5OTk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjIwIj5IIEEgTSBCIFUgUiBHPC90ZXh0Pgo8L3N2Zz4=" alt="UKH Hamburg Logo">
+                <span>UKH | EHRN</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Start</a></li>
+                <li><a href="#team">Unser Team</a></li>
+                <li><a href="#fachteam">Fachärztliches Team</a></li>
+                <li><a href="#leistungen">Leistungen</a></li>
+                <li><button class="theme-toggle" id="themeToggle">☀️</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Universitätsklinikum Hamburg | EHRN</h1>
+        <p>Exzellente medizinische Versorgung mit Herz und Kompetenz. Ihre Gesundheit ist unsere Mission.</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Leistungen Section -->
+        <section id="leistungen">
+            <h2>Unsere Leistungen</h2>
+            <p class="section-intro">
+                Als führendes Universitätsklinikum bieten wir ein umfassendes Spektrum modernster medizinischer Versorgung auf höchstem Niveau.
+            </p>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>🔬 Diagnostik</h3>
+                    <p>Modernste diagnostische Verfahren mit state-of-the-art Technologie für präzise Befunde.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚕️ Behandlung</h3>
+                    <p>Individuelle Therapiekonzepte durch interdisziplinäre Zusammenarbeit unserer Spezialisten.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🏥 Notfallversorgung</h3>
+                    <p>24/7 Notaufnahme mit hochqualifiziertem Team für schnelle und kompetente Hilfe.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔍 Forschung</h3>
+                    <p>Innovative Forschungsprojekte für die Medizin von morgen - Universitätsmedizin auf höchstem Niveau.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section id="team">
+            <h2>Unser Team</h2>
+            <p class="section-intro">
+                Lernen Sie die Menschen kennen, die sich täglich mit Leidenschaft und Expertise für Ihre Gesundheit einsetzen.
+            </p>
+            
+            <div class="team-category">
+                <h3 class="category-title">Chefärzte</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="avatar-placeholder">CS</div>
+                        <h3>Prof. Dr. med. Coataware Schmidt</h3>
+                        <div class="role">Chefarzt</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-category">
+                <h3 class="category-title">Leitender Oberarzt</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="avatar-placeholder">DU</div>
+                        <h3>Derzeit unbesetzt</h3>
+                        <div class="role">Leitender Oberarzt</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-category">
+                <h3 class="category-title">Oberärzte</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="avatar-placeholder">LR</div>
+                        <h3>Prof. Dr. med. Leon Rosales</h3>
+                        <div class="role">Oberarzt</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-category">
+                <h3 class="category-title">Sekretariat</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="avatar-placeholder">ML</div>
+                        <h3>Mia Lorenz</h3>
+                        <div class="role">Sekretariat</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-category">
+                <h3 class="category-title">Personalabteilung</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="avatar-placeholder">CS</div>
+                        <h3>Prof. Dr. med. Coataware Schmidt</h3>
+                        <div class="role">Personalabteilung</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-category">
+                <h3 class="category-title">Finanzverwaltung</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="avatar-placeholder">CS</div>
+                        <h3>Prof. Dr. med. Coataware Schmidt</h3>
+                        <div class="role">Finanzverwaltung</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-category">
+                <h3 class="category-title">Funktionsoberarzt</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="avatar-placeholder">DU</div>
+                        <h3>Derzeit unbesetzt</h3>
+                        <div class="role">Funktionsoberarzt</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-category">
+                <h3 class="category-title">Gesundheits- und Krankenpfleger</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="avatar-placeholder">ML</div>
+                        <h3>Mia Lorenz</h3>
+                        <div class="role">Gesundheits- und Krankenpfleger</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-category">
+                <h3 class="category-title">Pflegehelfer</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="avatar-placeholder">KA</div>
+                        <h3>Karim Alami</h3>
+                        <div class="role">Pflegehelfer</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar-placeholder">SR</div>
+                        <h3>Santa Rethstein</h3>
+                        <div class="role">Pflegehelfer</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-category">
+                <h3 class="category-title">Praktikanten</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="avatar-placeholder">AM</div>
+                        <h3>Astro Musk</h3>
+                        <div class="role">Praktikant</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar-placeholder">JK</div>
+                        <h3>Prof. Dr. iur. Jason Kontrast</h3>
+                        <div class="role">Praktikant</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar-placeholder">KF</div>
+                        <h3>Kaan Flamingoheiss</h3>
+                        <div class="role">Praktikant</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar-placeholder">KG</div>
+                        <h3>Kevin Gross</h3>
+                        <div class="role">Praktikant</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar-placeholder">MG</div>
+                        <h3>Moritz Grevemayer</h3>
+                        <div class="role">Praktikant</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar-placeholder">OK</div>
+                        <h3>Oliver Kalter</h3>
+                        <div class="role">Praktikant</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fachärztliches Team Section -->
+        <section id="fachteam">
+            <h2>Unser Fachärztliches Team</h2>
+            <p class="section-intro">
+                Unsere Fachärzte bringen jahrelange Erfahrung und höchste Qualifikationen in ihren jeweiligen Fachgebieten mit.
+            </p>
+            
+            <div class="team-category">
+                <h3 class="category-title">Facharzt für Innere Medizin</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="avatar-placeholder">LS</div>
+                        <h3>Prof. Dr. med. Lucifer Star</h3>
+                        <div class="role">Facharzt für Innere Medizin</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar-placeholder">MK</div>
+                        <h3>Prof. Dr. med. Max Kontrast</h3>
+                        <div class="role">Facharzt für Innere Medizin</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-category">
+                <h3 class="category-title">Facharzt für Chirurgie</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="avatar-placeholder">CS</div>
+                        <h3>Prof. Dr. med. Coataware Schmidt</h3>
+                        <div class="role">Facharzt für Chirurgie</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar-placeholder">LS</div>
+                        <h3>Prof. Dr. med. Lower Schaf</h3>
+                        <div class="role">Facharzt für Chirurgie</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-category">
+                <h3 class="category-title">Facharzt für Neurologie</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="avatar-placeholder">LR</div>
+                        <h3>Prof. Dr. med. Leon Rosales</h3>
+                        <div class="role">Facharzt für Neurologie</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar-placeholder">JS</div>
+                        <h3>Prof. Dr. med. Jonas Schaf</h3>
+                        <div class="role">Facharzt für Neurologie</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-category">
+                <h3 class="category-title">Facharzt für Kardiologie</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="avatar-placeholder">CS</div>
+                        <h3>Prof. Dr. med. Coataware Schmidt</h3>
+                        <div class="role">Facharzt für Kardiologie</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-category">
+                <h3 class="category-title">Facharzt für Radiologie</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="avatar-placeholder">JS</div>
+                        <h3>Prof. Dr. med. Jonas Schaf</h3>
+                        <div class="role">Facharzt für Radiologie</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-category">
+                <h3 class="category-title">Facharzt für Anästhesiologie</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="avatar-placeholder">LS</div>
+                        <h3>Prof. Dr. med. Lucifer Star</h3>
+                        <div class="role">Facharzt für Anästhesiologie</div>
+                    </div>
+                    <div class="team-card">
+                        <img src="https://drive.google.com/uc?export=view&id=12NrwjcyyESxT42OV6tNSVPXzWYzOQFqm" alt="Prof. Dr. med. Silas Schnabel">
+                        <h3>Prof. Dr. med. Silas Schnabel</h3>
+                        <div class="role">Facharzt für Anästhesiologie</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-category">
+                <h3 class="category-title">Facharzt für Psychologie</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="avatar-placeholder">JS</div>
+                        <h3>Prof. Dr. med. Jonas Schaf</h3>
+                        <div class="role">Facharzt für Psychologie</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar-placeholder">MK</div>
+                        <h3>Prof. Dr. med. Max Kontrast</h3>
+                        <div class="role">Facharzt für Psychologie</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-category">
+                <h3 class="category-title">Facharzt für Notfallmedizin</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="avatar-placeholder">LR</div>
+                        <h3>Prof. Dr. med. Leon Rosales</h3>
+                        <div class="role">Facharzt für Notfallmedizin</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar-placeholder">LS</div>
+                        <h3>Prof. Dr. med. Lower Schaf</h3>
+                        <div class="role">Facharzt für Notfallmedizin</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Universitätsklinikum Hamburg | EHRN</h4>
+                <p>Exzellenz in Medizin und Forschung</p>
+                <p>Ihre Gesundheit ist unsere Mission</p>
+            </div>
+            <div class="footer-section">
+                <h4>Kontakt</h4>
+            
+                <p>✉️ info@ukh-ehrn.de</p>
+                <p>📍 Gross-Sand 1, 20095 Hamburg</p>
+            </div>
+            <div class="footer-section">
+                <h4>Öffnungszeiten</h4>
+                <p>Notaufnahme: 24/7</p>
+                <p>Ambulanz: Mo-Fr 8:00-18:00</p>
+                
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Universitätsklinikum Hamburg | EHRN. Alle Rechte vorbehalten.</p>
+            <p><span class="privacy-link" id="privacyLink">Datenschutzerklärung</span></p>
+        </div>
+    </footer>
+
+    <!-- Datenschutz Modal -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Datenschutzerklärung</h2>
+            
+            <div class="warning">
+                ⚠️ WICHTIGER HINWEIS: Diese Website ist nur für die Bespaßung und ist nicht echt! 
+                Sie dient ausschließlich zu Demonstrationszwecken.
+            </div>
+
+            <p><strong>1. Verantwortlicher</strong></p>
+            <p>
+                Diese Demonstration-Website wird ausschließlich zu Unterhaltungszwecken bereitgestellt 
+                und repräsentiert keine reale medizinische Einrichtung.
+            </p>
+
+            <p><strong>2. Erhebung und Speicherung personenbezogener Daten</strong></p>
+            <p>
+                Diese Demo-Website erhebt keine personenbezogenen Daten. Es werden keine Cookies gesetzt, 
+                keine Nutzerdaten gesammelt und keine Informationen an Dritte weitergegeben.
+            </p>
+
+            <p><strong>3. Verwendungszweck</strong></p>
+            <p>
+                Diese Website dient ausschließlich der Demonstration von Webdesign-Fähigkeiten und 
+                hat keinerlei medizinische, kommerzielle oder administrative Funktion.
+            </p>
+
+            <p><strong>4. Ihre Rechte</strong></p>
+            <p>
+                Da keine Daten erhoben werden, entfallen die üblichen Datenschutzrechte (Auskunft, 
+                Berichtigung, Löschung etc.) in diesem speziellen Fall.
+            </p>
+
+            <p><strong>5. Haftungsausschluss</strong></p>
+            <p>
+                Alle auf dieser Website dargestellten Informationen, Namen, Kontaktdaten und 
+                Inhalte sind fiktiv und dienen ausschließlich Demonstrationszwecken. Es besteht 
+                keinerlei Verbindung zu realen medizinischen Einrichtungen.
+            </p>
+
+            <p><strong>6. Technische Umsetzung</strong></p>
+            <p>
+                Diese Website nutzt ausschließlich clientseitige Technologien (HTML, CSS, JavaScript). 
+                Das Dark/Light Mode wird lokal im Browser gespeichert und verlässt nie Ihr Gerät.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+        
+        // Check for saved theme preference
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        htmlElement.setAttribute('data-theme', currentTheme);
+        themeToggle.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+        });
+
+        // Privacy Modal
+        const modal = document.getElementById('privacyModal');
+        const privacyLink = document.getElementById('privacyLink');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        privacyLink.onclick = () => {
+            modal.style.display = 'block';
+        };
+
+        closeBtn.onclick = () => {
+            modal.style.display = 'none';
+        };
+
+        window.onclick = (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
